@@ -9,5 +9,8 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Direccion {
+public class Direccion implements Implementacion{
+    public void action(){
+        //aca se debe modificar la accion inical
+    }
 }

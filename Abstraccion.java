@@ -9,8 +9,7 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Electrico implements Implementacion{
-    public void action(){
-        //aca se debe modificar la accion inical
-    }
+public interface Abstraccion {
+    public void action();
+    
 }

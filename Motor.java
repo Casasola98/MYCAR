@@ -7,12 +7,16 @@ package ejemplo;
 
 import static ejemplo.IConstants.*;
 
-public class Motor{
-    public float RPS;
+public class Motor implements Implementacion{
+     public float RPS;
     public float AddingRPS;
     public int ActualGear;
 
     
+    public void action(){
+        
+    }
+   
     public Motor(){
         RPS = 0;
         AddingRPS = FIRST_GEAR_MAX_RPS;
