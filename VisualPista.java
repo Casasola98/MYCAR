@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mycar;
+package ejemplo;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Daniela
  */
-public class VisualPista {
+public class VisualPista implements Observer {
+    
+    @Override
+    public void update(Observable o, Object arg) {     
+        
+    }
     
 }
