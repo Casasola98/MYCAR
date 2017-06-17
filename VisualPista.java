@@ -4,18 +4,11 @@
  * and open the template in the editor.
  */
 package ejemplo;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  *
  * @author Daniela
  */
-public class VisualPista implements Observer {
-    
-    @Override
-    public void update(Observable o, Object arg) {     
-        
-    }
+public class VisualPista {
     
 }

@@ -4,25 +4,11 @@
  * and open the template in the editor.
  */
 package ejemplo;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  *
  * @author Daniela
  */
-public class Dash extends Observable {
-    //ATRIBUTOS
-
-@Override
-public void notifyObservers(Object arg){
-    super.notifyObservers(arg);
+public class Dash {
+    
 }
-
-@Override
-public synchronized void addObserver(Observer o) {
-        super.addObserver(o); 
-}
-
-}
-

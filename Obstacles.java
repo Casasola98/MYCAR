@@ -9,6 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public interface SystemType {
-    public void create();
+public class Obstacles {
+    
 }

@@ -5,18 +5,10 @@
  */
 package ejemplo;
 
-import java.util.Observable;
-import java.util.Observer;
-
 /**
  *
  * @author Daniela
  */
-public class VisualDash implements Observer {
-    
-    @Override
-    public void update(Observable o, Object arg) {     
-        
-    }
+public class VisualDash {
     
 }

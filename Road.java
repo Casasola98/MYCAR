@@ -9,6 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class DirectionSystem extends AbstractSystem {
+public class Road {
     
 }

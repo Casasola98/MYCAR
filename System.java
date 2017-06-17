@@ -9,8 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Obstaculos implements Implementacion{
-    public void action(){
-        //aca se debe modificar la accion inical
-    }
+public class System {
+    
 }

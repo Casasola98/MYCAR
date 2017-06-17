@@ -9,6 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class CoordinatorSystem extends AbstractSystem{
+public class Electric {
     
 }
