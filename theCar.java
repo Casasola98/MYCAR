@@ -6,7 +6,10 @@
 package Window;
 
 import ejemplo.Tiempo;
+import ejemplo.Motor;
 import java.awt.Color;
+
+import static ejemplo.IConstants.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,13 +20,17 @@ import java.awt.event.KeyListener;
  */
 public class theCar extends javax.swing.JFrame {
 
-    Tiempo theTimer;
-    boolean moving = false;
-    boolean wiper = false;
-    boolean lights = false;
+    Tiempo TheTimer;
+    boolean Moving = false;
+    boolean Wiper = false;
+    boolean Lights = false;
+    boolean RightD = false;
+    boolean LeftD = false;
+    Motor TheEngine;
     
     public theCar() {
-        theTimer = new Tiempo();
+        TheEngine = new Motor();
+        TheTimer = new Tiempo(TheEngine);
         initComponents();
     }
 
@@ -88,24 +95,26 @@ public class theCar extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 92, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("XXX KM/H");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("0 KM/H");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 41, Short.MAX_VALUE)
-                .addComponent(jLabel3))
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,15 +124,16 @@ public class theCar extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("MARCHA: ");
+        jLabel4.setText("GEAR:   1");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel4)
-                .addGap(0, 41, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,34 +260,31 @@ public class theCar extends javax.swing.JFrame {
 
     private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_W){
-            if (! moving){
-                theTimer.Contar();
-                moving = true;
+            if (! Moving){
+                TheTimer.Contar();
+                Moving = true;
             }
-            //System.out.println(theTimer.getSegundos());
-            //System.out.println(velocidad);
-            //velocidad++;
+            jLabel2.setText(REVS + TheEngine.RPS);
+            jLabel3.setText(TheEngine.Speed + KM_H);
         }
         if(evt.getKeyCode()==KeyEvent.VK_D){
-            //System.out.println(theTimer.getSegundos());
             System.out.println("Derecha");
-            //velocidad++;
         }
         if(evt.getKeyCode()==KeyEvent.VK_A){
-            //System.out.println(theTimer.getSegundos());
             System.out.println("Izquierda");
-            //velocidad++;
         }
         if(evt.getKeyCode()==KeyEvent.VK_S){
-            //System.out.println(theTimer.getSegundos());
             System.out.println("Frena");
-            //velocidad++;
         }
         if(evt.getKeyCode()==KeyEvent.VK_UP){
-            System.out.println("Sube Marcha");
+            TheEngine.advanceGear();
+            jLabel4.setText(GEAR + TheEngine.ActualGear);
+            System.out.println("Marcha: " + TheEngine.ActualGear);
         }
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
-            System.out.println("Baja Marcha");
+            TheEngine.decreaseGear();
+            jLabel4.setText(GEAR + TheEngine.ActualGear);
+            System.out.println("Marcha: " + TheEngine.ActualGear);
         }
         if(evt.getKeyCode()==KeyEvent.VK_LEFT){
             System.out.println("Direccional Izquierda");
@@ -289,22 +296,22 @@ public class theCar extends javax.swing.JFrame {
         }
         if(evt.getKeyCode()==KeyEvent.VK_P){
             System.out.println("Limpia Parabrisas");
-            if (!wiper){
-                wiper = true;
+            if (!Wiper){
+                Wiper = true;
                 jPanel7.setBackground(Color.YELLOW);
             }
             else{
-                wiper = false;
+                Wiper = false;
                 jPanel7.setBackground(Color.WHITE);
             }
         }
         if(evt.getKeyCode()==KeyEvent.VK_L){
-            if (!lights){
-                lights = true;
+            if (!Lights){
+                Lights = true;
                 jPanel8.setBackground(Color.YELLOW);
             }
             else{
-                lights = false;
+                Lights = false;
                 jPanel8.setBackground(Color.WHITE);
             }
         }
@@ -313,8 +320,8 @@ public class theCar extends javax.swing.JFrame {
     private void jPanel1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyReleased
         if(evt.getKeyCode()==KeyEvent.VK_W){
             System.out.println("Baja Velocidad");
-            moving = false;
-            theTimer.Detener();
+            Moving = false;
+            TheTimer.Detener();
         }
     }//GEN-LAST:event_jPanel1KeyReleased
 

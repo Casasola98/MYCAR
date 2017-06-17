@@ -7,24 +7,28 @@ public class Tiempo  {
 
     private Timer timer = new Timer(); 
     private int segundos=0;
-
+    Motor TheEngine;
+    
+    public Tiempo(Motor pEngine){
+        TheEngine = pEngine;
+    }
+    
+    
     //Clase interna que funciona como contador
     class Contador extends TimerTask {
         public void run() {
             segundos++;
-     System.out.println("segundo: " + segundos);
+            TheEngine.increaseRPS();
         }
     }
     //Crea un timer, inicia segundos a 0 y comienza a contar
     public void Contar()
     {
-        this.segundos=0;
         timer = new Timer();
         timer.schedule(new Contador(), 0, 1000);
     }
     //Detiene el contador
     public void Detener() {
-        this.segundos = 0;
         timer.cancel();
     }
     //Metodo que retorna los segundos transcurridos
