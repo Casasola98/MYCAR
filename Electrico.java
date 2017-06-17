@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mycar;
+package ejemplo;
 
 /**
  *
  * @author Daniela
  */
-public class Electrico {
-    
+public class Electrico implements SystemType {
+    @Override
+    public void create() {
+}
 }

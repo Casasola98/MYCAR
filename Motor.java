@@ -7,11 +7,15 @@ package ejemplo;
 
 import static ejemplo.IConstants.*;
 
-public class Motor {
-    
+public class Motor implements SystemType {
     public float RPS;
     public float AddingRPS;
     public int ActualGear;
+    
+    @Override
+    public void create() {
+    }
+
     
     public Motor(){
         RPS = 0;
