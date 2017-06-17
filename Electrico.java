@@ -9,8 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Electrico implements SystemType {
-    @Override
-    public void create() {
-}
+public class Electrico {
+    
 }
