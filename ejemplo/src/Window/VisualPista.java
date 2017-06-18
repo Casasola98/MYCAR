@@ -67,7 +67,7 @@ public class VisualPista implements Observer {
             B.theR = ARoad;
         }
         else if (ab.equals("F")){
-            B.theR = ARoad;
+            B.stop();
         }
         if (!a){
             B.start();
