@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo;
+package Bridge;
 
-import java.lang.Number;
 import static ejemplo.IConstants.*;
+import Bridge.Systems;
 
-public class Engine implements Systems {
-    public void action(){
-    //crear
-}    
-
+public class Engine implements Systems{
+    
     public double RPS;
     public double AddingRPS;
     public int ActualGear;
@@ -23,6 +20,10 @@ public class Engine implements Systems {
         Speed = 0;
         AddingRPS = FIRST_GEAR_MAX_RPS;
         ActualGear = MIN_GEAR;
+    }
+    
+     public void action(){
+        
     }
     
     public void increaseRPS(){

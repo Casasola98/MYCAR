@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo;
+package Bridge;
+
+import Bridge.AbstractSystem;
 
 /**
  *
@@ -17,5 +19,4 @@ public class CoordinatorSystem implements AbstractSystem{
     public void action(){
         newSystem.action();
     }
-    
 }

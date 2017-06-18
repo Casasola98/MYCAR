@@ -1,16 +1,23 @@
 package ejemplo;
 
+import Bridge.Engine;
+import static ejemplo.IConstants.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JLabel;
 
 public class Time  {
 
     private Timer timer = new Timer(); 
     private int segundos=0;
     Engine TheEngine;
+    JLabel KM;
+    JLabel REVOLUTIONS;
     
-    public Time(Engine pEngine){
+    public Time(Engine pEngine, JLabel A, JLabel B){
         TheEngine = pEngine;
+        REVOLUTIONS = A;
+        KM = B;
     }
     
     
@@ -19,6 +26,8 @@ public class Time  {
         public void run() {
             segundos++;
             TheEngine.increaseRPS();
+            REVOLUTIONS.setText(REVS + TheEngine.RPS);
+            KM.setText(TheEngine.Speed + KM_H);
         }
     }
     //Crea un timer, inicia segundos a 0 y comienza a contar

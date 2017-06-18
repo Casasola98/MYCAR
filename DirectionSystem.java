@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ejemplo;
+package Bridge;
 
-/**
- *
- * @author Daniela
- */
+import Bridge.AbstractSystem;
+
 public class DirectionSystem implements AbstractSystem{
+    
     private Systems newSystem;
+    
     public DirectionSystem(Systems newSystem){
         this.newSystem = newSystem;
     }
+    
     public void action(){
         newSystem.action();
     }

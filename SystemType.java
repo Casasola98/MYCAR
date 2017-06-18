@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bridge;
+package ejemplo;
 
 /**
  *
  * @author Daniela
  */
-public interface Systems {
-    
-    public abstract void action();
-    
+public interface SystemType {
+    public void create();
 }
-
