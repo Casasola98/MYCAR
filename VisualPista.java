@@ -1,5 +1,5 @@
 
-package ejemplo;
+package Window;
 
 import java.util.Observable;
 import java.util.Observer;

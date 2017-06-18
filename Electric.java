@@ -1,7 +1,7 @@
 
-package Bridge;
+package BridgeP;
 
-import Bridge.Systems;
+import BridgeP.Systems;
 
 public class Electric implements Systems{
 

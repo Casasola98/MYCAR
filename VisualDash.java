@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Window;
 
 import ejemplo.Time;
-import Bridge.Engine;
+import BridgeP.Engine;
 import java.awt.Color;
 
 import static ejemplo.IConstants.*;
+import java.awt.Image;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-/**
- *
- * @author j_dan
- */
 public class VisualDash extends javax.swing.JDialog implements Observer{
 
     Time TheTimer;
@@ -29,6 +25,8 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
     boolean RightD = false;
     boolean LeftD = false;
     Engine TheEngine;
+    JLabel Paisaje = new JLabel();
+    JLabel InsideCar = new JLabel();
     
     public VisualDash(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -37,6 +35,22 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
         
         TheEngine = new Engine();
         TheTimer = new Time(TheEngine, jLabel2, jLabel3);
+        
+        ImageIcon icon2 = new ImageIcon("IMAGENES/fondo.png");
+        Icon Icon2 = new ImageIcon(icon2.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+        InsideCar.setBounds(0, 0, jLabel1.getWidth(), jLabel1.getHeight());
+        InsideCar.setIcon(Icon2);
+        jLabel1.add(InsideCar);
+        InsideCar.setVisible(true);
+        
+        ImageIcon icon1 = new ImageIcon("IMAGENES/D1.png");
+        Icon Icon1 = icon1;
+        Paisaje.setBounds(0, 0, Icon1.getIconWidth(), Icon1.getIconHeight());
+        Paisaje.setIcon(Icon1);
+        jLabel1.add(Paisaje);
+        Paisaje.setVisible(true);
+        
+        
         
     }
 
@@ -79,7 +93,7 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ejemplo/fondo1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Desktop\\IMAGENES\\DefaultI.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -275,9 +289,13 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
         }
         if(evt.getKeyCode()==KeyEvent.VK_D){
             System.out.println("Derecha");
+            if(Paisaje.getX() > -360)
+                Paisaje.setLocation(Paisaje.getX()-30,0);
         }
         if(evt.getKeyCode()==KeyEvent.VK_A){
             System.out.println("Izquierda");
+            if (Paisaje.getX() < 0)
+                Paisaje.setLocation(Paisaje.getX()+30,0);
         }
         if(evt.getKeyCode()==KeyEvent.VK_S){
             System.out.println("Frena");
@@ -330,11 +348,6 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
             TheTimer.Detener();
         }
     }//GEN-LAST:event_jPanel1KeyReleased
-
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
