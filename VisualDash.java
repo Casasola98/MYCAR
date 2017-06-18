@@ -1,11 +1,13 @@
 
 package Window;
 
+import BridgeP.Dash;
 import ejemplo.Time;
 import BridgeP.Engine;
 import java.awt.Color;
 
 import static ejemplo.IConstants.*;
+import ejemplo.Simulator;
 import java.awt.Image;
 
 import java.awt.event.KeyEvent;
@@ -17,24 +19,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class VisualDash extends javax.swing.JDialog implements Observer{
-
-    Time TheTimer;
+    
+    Simulator TheSimulator;
+    //Time TheTimer;
     boolean Moving = false;
     boolean Wiper = false;
     boolean Lights = false;
     boolean RightD = false;
     boolean LeftD = false;
-    Engine TheEngine;
+    //Engine TheEngine;
     JLabel Paisaje = new JLabel();
     JLabel InsideCar = new JLabel();
     
-    public VisualDash(java.awt.Frame parent, boolean modal) {
+    public VisualDash(java.awt.Frame parent, boolean modal, Simulator pSimulator) {
         super(parent, modal);
         
         initComponents();
         
-        TheEngine = new Engine();
-        TheTimer = new Time(TheEngine, jLabel2, jLabel3);
+        //TheEngine = new Engine();
+        //TheTimer = new Time(TheEngine, jLabel2, jLabel3);
         
         ImageIcon icon2 = new ImageIcon("IMAGENES/fondo.png");
         Icon Icon2 = new ImageIcon(icon2.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
@@ -50,13 +53,37 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
         jLabel1.add(Paisaje);
         Paisaje.setVisible(true);
         
-        
-        
+        TheSimulator = pSimulator;
+        TheSimulator.chargeSystems(this);
     }
 
     @Override
     public void update(Observable o, Object arg) {     
+        Dash ActualDash = (Dash) arg;
         
+        jLabel2.setText(REVS + ActualDash.RPS);
+        jLabel3.setText(ActualDash.Speed + KM_H);
+        jLabel4.setText(GEAR + ActualDash.ActualGear);
+        
+        if (ActualDash.Lights)
+            jPanel8.setBackground(Color.YELLOW);
+        else
+            jPanel8.setBackground(Color.WHITE);
+        
+        if (ActualDash.Wipers)
+            jPanel7.setBackground(Color.YELLOW);
+        else
+            jPanel7.setBackground(Color.WHITE);
+        
+        if (ActualDash.RightDirectional)
+            jPanel6.setBackground(Color.YELLOW);
+        else
+            jPanel6.setBackground(Color.WHITE);
+        
+        if (ActualDash.LeftDirectional)
+            jPanel6.setBackground(Color.YELLOW);
+        else
+            jPanel6.setBackground(Color.WHITE);
     }
     
     
@@ -93,7 +120,7 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\admin\\Desktop\\IMAGENES\\DefaultI.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Window/DefaultI.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,8 +180,8 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,10 +309,11 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
     private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_W){
             if (! Moving){
-                TheTimer.Contar();
+                TheSimulator.accelerate();
                 Moving = true;
             }
-            
+            else
+                TheSimulator.accelerate();
         }
         if(evt.getKeyCode()==KeyEvent.VK_D){
             System.out.println("Derecha");
@@ -299,45 +327,27 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
         }
         if(evt.getKeyCode()==KeyEvent.VK_S){
             System.out.println("Frena");
+            TheSimulator.brakeCar();
         }
         if(evt.getKeyCode()==KeyEvent.VK_UP){
-            TheEngine.advanceGear();
-            jLabel4.setText(GEAR + TheEngine.ActualGear);
-            System.out.println("Marcha: " + TheEngine.ActualGear);
+            TheSimulator.advanceGear();
         }
         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
-            TheEngine.decreaseGear();
-            jLabel4.setText(GEAR + TheEngine.ActualGear);
-            System.out.println("Marcha: " + TheEngine.ActualGear);
+            TheSimulator.decreaseGear();
         }
         if(evt.getKeyCode()==KeyEvent.VK_LEFT){
             System.out.println("Direccional Izquierda");
-            jPanel6.setBackground(Color.YELLOW);
+            TheSimulator.LD();
         }
         if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
             System.out.println("Direccional Derecha");
-            jPanel6.setBackground(Color.YELLOW);
+            TheSimulator.RD();
         }
         if(evt.getKeyCode()==KeyEvent.VK_P){
-            System.out.println("Limpia Parabrisas");
-            if (!Wiper){
-                Wiper = true;
-                jPanel7.setBackground(Color.YELLOW);
-            }
-            else{
-                Wiper = false;
-                jPanel7.setBackground(Color.WHITE);
-            }
+            TheSimulator.Wipers();
         }
         if(evt.getKeyCode()==KeyEvent.VK_L){
-            if (!Lights){
-                Lights = true;
-                jPanel8.setBackground(Color.YELLOW);
-            }
-            else{
-                Lights = false;
-                jPanel8.setBackground(Color.WHITE);
-            }
+            TheSimulator.Lights();
         }
     }//GEN-LAST:event_jPanel1KeyPressed
 
@@ -345,7 +355,7 @@ public class VisualDash extends javax.swing.JDialog implements Observer{
         if(evt.getKeyCode()==KeyEvent.VK_W){
             System.out.println("Baja Velocidad");
             Moving = false;
-            TheTimer.Detener();
+            TheSimulator.roll();
         }
     }//GEN-LAST:event_jPanel1KeyReleased
 

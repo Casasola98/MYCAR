@@ -1,5 +1,6 @@
 package ejemplo;
 
+import BridgeP.Dash;
 import BridgeP.Engine;
 import static ejemplo.IConstants.*;
 import java.util.Timer;
@@ -11,23 +12,37 @@ public class Time  {
     private Timer timer = new Timer(); 
     private int segundos=0;
     Engine TheEngine;
-    JLabel KM;
-    JLabel REVOLUTIONS;
+    Dash TheDash;
+    int option;
     
-    public Time(Engine pEngine, JLabel A, JLabel B){
+    public Time(Engine pEngine, Dash pDash, int option){
         TheEngine = pEngine;
-        REVOLUTIONS = A;
-        KM = B;
+        TheDash = pDash;
+        this.option = option;
     }
     
-    
+    public void changeOption(int pOption){
+        option = pOption;
+    }
     //Clase interna que funciona como contador
     class Contador extends TimerTask {
         public void run() {
+            
+            if (option == 0)
+                TheEngine.increaseRPS();
+            else if (option == 2){
+                TheEngine.brakeWheels();
+                option = 1;
+            }
+            TheDash.Speed= TheEngine.Speed;
+            TheDash.RPS= TheEngine.RPS;
+            TheDash.ActualGear= TheEngine.ActualGear;
+            
             segundos++;
-            TheEngine.increaseRPS();
-            REVOLUTIONS.setText(REVS + TheEngine.RPS);
-            KM.setText(TheEngine.Speed + KM_H);
+            System.out.println(TheEngine.calculateDistance(segundos));
+            
+            TheDash.notifyObservers(TheDash);
+            
         }
     }
     //Crea un timer, inicia segundos a 0 y comienza a contar

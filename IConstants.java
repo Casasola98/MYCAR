@@ -28,4 +28,12 @@ public interface IConstants {
     
     public final String KM_H = " KM/H";
     
+    public final String File1 = "R1.txt";
+    
+    public final String File2 = "R2.txt";
+    
+    public final String File3 = "R3.txt";
+    
+    
+    
 }

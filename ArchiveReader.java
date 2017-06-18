@@ -31,7 +31,6 @@ public class ArchiveReader {
         try {
             while ((linea = bufferR.readLine())!=null) {
                 line = linea.toCharArray();
-                System.out.println(line.length);
                 for (int index =0; index < line.length; index++){
                     Item = String.valueOf(line[index]);
                     if ( Item.equals(".") || Item.equals("+") || Item.equals("T")||Item.equals("D")||Item.equals("N")||Item.equals("L")||Item.equals("F")){

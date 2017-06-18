@@ -5,10 +5,10 @@ import BridgeP.Systems;
 
 public class Electric implements Systems{
 
-    boolean Lights;
-    boolean RightDirectional;
-    boolean LeftDirectional;
-    boolean Wipers;
+    public boolean Lights;
+    public boolean RightDirectional;
+    public boolean LeftDirectional;
+    public boolean Wipers;
     
     public Electric(){
         setLights(false);

@@ -22,6 +22,11 @@ public class Engine implements Systems{
         
     }
     
+     public int calculateDistance(int seconds){
+         int Distance = (Speed * 1000 * seconds)/3600;
+         return Distance;
+     }
+     
     public void increaseRPS(){
         
         RPS+= AddingRPS;
@@ -36,6 +41,17 @@ public class Engine implements Systems{
     public void calculateSpeed(){
         
         Speed = (int) ((PI * WHEEL_DIAMETER * RPS * 60)/1000);
+        
+    }
+    
+    public void brakeWheels(){
+        
+        if (Speed > 0){
+            Speed-= 3;
+            if (Speed < 0)
+                Speed = 0;
+            RPS = ((Speed*1000)/(PI*WHEEL_DIAMETER*60));
+        }
         
     }
     
