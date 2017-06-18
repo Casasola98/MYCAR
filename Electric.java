@@ -9,6 +9,8 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Electric {
-    
+public class Electric implements Systems {
+    public void action(){
+    //crear
+}    
 }

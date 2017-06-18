@@ -9,6 +9,8 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Dash {
-    
+public class Dash implements Systems {
+    public void action(){
+    //crear
+}    
 }

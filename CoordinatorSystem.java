@@ -9,8 +9,13 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Direction implements Systems {
+public class CoordinatorSystem implements AbstractSystem{
+    private Systems newSystem;
+    public CoordinatorSystem(Systems newSystem){
+        this.newSystem = newSystem;
+    }
     public void action(){
-    //crear
-}    
+        newSystem.action();
+    }
+    
 }

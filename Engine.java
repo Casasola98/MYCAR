@@ -8,8 +8,11 @@ package ejemplo;
 import java.lang.Number;
 import static ejemplo.IConstants.*;
 
-public class Engine {
-    
+public class Engine implements Systems {
+    public void action(){
+    //crear
+}    
+
     public double RPS;
     public double AddingRPS;
     public int ActualGear;

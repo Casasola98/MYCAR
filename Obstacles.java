@@ -9,6 +9,8 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Obstacles {
-    
+public class Obstacles implements Systems {
+    public void action(){
+    //crear
+}    
 }

@@ -9,8 +9,6 @@ package ejemplo;
  *
  * @author Daniela
  */
-public class Direction implements Systems {
-    public void action(){
-    //crear
-}    
+public interface AbstractSystem {
+    public void action();
 }
