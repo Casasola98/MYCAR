@@ -5,7 +5,8 @@
  */
 package Window;
 
-import Window.theCar;
+import Window.VisualDash;
+import ejemplo.ArchiveReader;
 
 /**
  *
@@ -13,11 +14,14 @@ import Window.theCar;
  */
 public class Opcional {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        new theCar().setVisible(true);
+    public static void main(String args[]) {
+      
+    //Menu theMenu = new Menu();
+    //theMenu.setVisible(true);
+    
+    ArchiveReader A = new ArchiveReader();
+    System.out.println(A.readArchive("R1.txt"));
+    
     }
     
 }
