@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ejemplo;
-/**
- *
- * @author Daniela
- */
+
+package FactoryP;
+
+import FactoryP.TypeFactory;
+import javax.swing.JOptionPane;
+
 public class Rain implements TypeFactory {
     @Override 
     public void paint(){
+        JOptionPane.showMessageDialog(null, "PRECAUCIÓN, LLUVIA");
         
     }
     
